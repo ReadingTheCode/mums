@@ -1,0 +1,135 @@
+.navbar-brand {
+    display: block;
+    height: 104px;
+    padding: 2px
+}
+
+.logo {
+    width: 169px;
+    height: 100px;
+    margin: 0px 20px;
+    background: transparent url("images/mums_200.png") no-repeat center center;
+}
+
+.product-type-label {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.product-box {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    background: white url("images/default_200.png") no-repeat center center;
+    cursor: pointer;
+}
+
+.product-image {
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.product-name {
+    display: block;
+    margin: 0px;
+    padding: 2px 5px;
+    font-weight: bold;
+    background: grey;
+    background: rgba(10, 10, 10, 0.4);
+    color: white;
+}
+
+.product-price {
+    position: absolute;
+    padding: 2px 5px;
+    bottom: 5px;
+    right: 5px;
+    font-weight: bold;
+    background: white;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.product-offer {
+    position: absolute;
+    display: block;
+    width: 32px;
+    height: 32px;
+    bottom: 5px;
+    left: 5px;
+    background: white url("images/3x2_32.png") no-repeat center center;
+    background: rgba(255, 255, 255, 0.7) url("images/3x2_32.png") no-repeat center center;
+}
+
+.cart-label {
+    margin: 0px 0px 10px 0px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+#cart-items, #cart-discounts {
+    list-style-type: none;
+    padding: 0px;
+}
+
+#cart-items > li,
+#cart-discounts > li {
+    display: block;
+    height: 20px;
+}
+
+#cart-loading {
+    width: 32px;
+    height: 32px;
+    margin: auto;
+    background: transparent url("images/loading.gif") no-repeat center center;
+}
+
+.cart-separator {
+    display: inline-block;
+    width: 80px;
+    border-top: 2px solid black;
+    margin-bottom: 6px;
+}
+
+.btn-xxs {
+    padding: 2px 3px 4px 5px;
+    font-size: 9px;
+    line-height: 1.5;
+    border-radius: 3px;
+    margin: 1px 2px;
+}
+
+.order-header-label {
+    font-weight: bold;
+}
+
+.order-number-box {
+    text-align: center;
+    font-size: 2em;
+}
+
+.order-number-box .order-number {
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.order-line-subtotal {
+    text-align: right;
+}
+
+.order-lines-total-label, .order-lines-total-amount {
+    font-weight: bold;
+    text-align: right;
+}
+
+.order-ready-box {
+    text-align: center;
+    padding: 10px;
+    margin: 0 0 20px 0;
+}
+.table-condensed {
+    font-size: 1em;
+}

@@ -1,0 +1,135 @@
+[
+    {
+        "model": "shop.product",
+        "pk": 1,
+        "fields": {
+            "name": "Risotto",
+            "uom": "gr",
+            "uom_factor": 100,
+            "price": 3.50,
+            "product_type": "main",
+            "offer_3x2": false,
+            "image": "risotto_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 2,
+        "fields": {
+            "name": "Ensalada de espinacas",
+            "uom": "gr",
+            "uom_factor": 100,
+            "price": 1.65,
+            "product_type": "main",
+            "offer_3x2": false,
+            "image": "espinacas_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 3,
+        "fields": {
+            "name": "Tortellini alla carbonara",
+            "uom": "gr",
+            "uom_factor": 100,
+            "price": 1.30,
+            "product_type": "main",
+            "offer_3x2": false,
+            "image": "tortellini_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 4,
+        "fields": {
+            "name": "Pollo al curry",
+            "uom": "gr",
+            "uom_factor": 100,
+            "price": 1.55,
+            "product_type": "main",
+            "offer_3x2": false,
+            "image": "pollo_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 5,
+        "fields": {
+            "name": "Arroz con verduras",
+            "uom": "gr",
+            "uom_factor": 100,
+            "price": 1.55,
+            "product_type": "main",
+            "offer_3x2": false,
+            "image": "arroz_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 6,
+        "fields": {
+            "name": "Pizza primavera",
+            "uom": "ud",
+            "uom_factor": 1,
+            "price": 2.00,
+            "product_type": "main",
+            "offer_3x2": true,
+            "image": "pizza_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 7,
+        "fields": {
+            "name": "Carne estofada",
+            "uom": "gr",
+            "uom_factor": 100,
+            "price": 2.15,
+            "product_type": "main",
+            "offer_3x2": false,
+            "image": "carne_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 8,
+        "fields": {
+            "name": "Agua",
+            "uom": "ud",
+            "uom_factor": 1,
+            "price": 1.20,
+            "product_type": "drink",
+            "offer_3x2": false,
+            "image": "agua_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 9,
+        "fields": {
+            "name": "Zumo de naranja",
+            "uom": "ud",
+            "uom_factor": 1,
+            "price": 2.00,
+            "product_type": "drink",
+            "offer_3x2": true,
+            "image": "zumo_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 10,
+        "fields": {
+            "name": "Manzana",
+            "uom": "ud",
+            "uom_factor": 1,
+            "price": 2.00,
+            "product_type": "dessert",
+            "offer_3x2": false,
+            "image": "manzana_200.png"
+        }
+    }, {
+        "model": "shop.product",
+        "pk": 11,
+        "fields": {
+            "name": "Tarta de queso",
+            "uom": "ud",
+            "uom_factor": 1,
+            "price": 2.50,
+            "product_type": "dessert",
+            "offer_3x2": true,
+            "image": "tarta_200.png"
+        }
+    }
+]

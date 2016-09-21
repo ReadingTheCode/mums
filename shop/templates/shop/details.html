@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="order-number-box">
+            <p class="order-number-label">Your order number is:</p>
+            <p class="order-number">{{ order.number }}</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="order-ready-box bg-success">
+            We will email you when order is ready, thanks!
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="order-header-box">
+            <div class="row">
+                <div class="col-xs-4 col-xs-12">
+                    <span class="order-header-label">Order date</span>
+                </div>
+                <div class="col-xs-8 col-xs-12">
+                    <span class="order-header-data">{{ order.date|date:'d/m/Y H:i:s' }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-12">
+                    <span class="order-header-label">Firstname</span>
+                </div>
+                <div class="col-xs-8 col-xs-12">
+                    <span class="order-header-data">{{ order.firstname }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-12">
+                    <span class="order-header-label">Lastname</span>
+                </div>
+                <div class="col-xs-8 col-xs-12">
+                    <span class="order-header-data">{{ order.lastname }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-12">
+                    <span class="order-header-label">Email</span>
+                </div>
+                <div class="col-xs-8 col-xs-12">
+                    <span class="order-header-data">{{ order.email }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="order-lines-box">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Qty</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th class="order-line-subtotal">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for line in lines %}
+                    <tr>
+                        <td>{{ line.qty }} {{ line.product.uom }}{{ line.qty|pluralize:"s" }}.</td>
+                        <td>{{ line.product.name }}</td>
+                        <td>{{ line.product.price }} €</td>
+                        <td class="order-line-subtotal">{{ line.subtotal }} €</td>
+                    </tr>
+                    {% endfor %}
+                    {% for discount in discount %}
+                    <tr>
+                        {% if discount.discount_type == 'percent' %}
+                        <td>-{{ discount.percent }} %</td>
+                        {% else %}
+                        <td>-{{ discount.qty }}</td>
+                        {% endif %}
+                        <td>{{ discount.description }}</td>
+                        <td>{{ discount.base }} €</td>
+                        <td class="order-line-subtotal">{{ discount.subtotal }} €</td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="order-lines-total">
+                        <td colspan="3" class="order-lines-total-label">TOTAL</td>
+                        <td class="order-lines-total-amount">{{ order.total }} €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <a href="/" class="btn btn-link">Return</a>
+    </div>
+</div>
+
+{% endblock %}

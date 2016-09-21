@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{{ block.super }}
+<div class="row">
+    <div id="products" class="col-md-8 col-xs-12">
+        <div class="row">
+            {% for product_type, products in groups %}
+            {% if products %}
+            <div id="product-{{ product_type }}-label" class="col-xs-12 bg-info product-type-label">
+                {{ product_type.upper }}
+            </div>
+            <div id="product-{{ product_type }}-items" class="col-xs-12">
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div id="product-{{ product.id }}" class="product-box"
+                             data-id="{{ product.id }}"
+                             data-name="{{ product.name }}"
+                             data-type="{{ product.product_type }}"
+                             data-price="{{ product.price }}"
+                             data-offer="{{ product.offer_3x2 }}"
+                             data-uom="{{ product.uom }}"
+                             data-uom-factor="{{ product.uom_factor }}"
+                             >
+                            {% if product.image.url %}
+                                <div class="product-image"
+                                     style="background-image: url('{{ product.image.url }}');">
+                            {% endif %}
+                                <span class="product-name">{{ product.name }}</span>
+                                <span class="product-qty"></span>
+                                <span class="product-price">{{ product.price }} €</span>
+                                {% if product.offer_3x2 %}
+                                    <span class="product-offer"></span>
+                                {% endif %}
+                            {% if product.image %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div id="cart" class="col-md-4 col-xs-12">
+        <h2 class="bg-success cart-label">CART</h2>
+        <ul id="cart-items"></ul>
+        <div id="cart-loading" style="display: none;"></div>
+        <ul id="cart-discounts"></ul>
+        <div id="cart-total" style="display: none">
+            <span class="cart-separator pull-right"></span>
+            <div class="clearfix"></div>
+            <p id="cart-total-amount" class="text-right"></p>
+        </div>
+        {% if error_message %}
+            <p class="bg-danger"><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        <form id="cart-form" action="{% url 'shop:order' %}" method="post">
+            {% csrf_token %}
+            <input name="lines" type="hidden"/>
+            <div class="form-group {% if 'firstname' in error_fields.keys %}has-error{% endif %}">
+                <label for="firstname">Firstname</label>
+                {% for msg in error_fields.firstname %}
+                    <span class="help-block">{{ msg }}</span>
+                {% endfor %}
+                <input name="firstname" class="form-control" type="text"
+                       placeholder="Walter" value="{{ values.firstname }}"/>
+            </div>
+            <div class="form-group {% if 'lastname' in error_fields.keys %}has-error{% endif %}">
+                <label for="lastname">Lastname</label>
+                {% for msg in error_fields.lastname %}
+                    <span class="help-block">{{ msg }}</span>
+                {% endfor %}
+                <input name="lastname" class="form-control" type="text"
+                       placeholder="White" value="{{ values.lastname }}"/>
+            </div>
+            <div class="form-group {% if 'email' in error_fields.keys %}has-error{% endif %}">
+                <label for="email">Email address</label>
+                {% for msg in error_fields.email %}
+                    <span class="help-block">{{ msg }}</span>
+                {% endfor %}
+                <input name="email" class="form-control" type="email"
+                       placeholder="ww@breakingbad.com" value="{{ values.email }}"/>
+            </div>
+            <button id="cart-submit" type="button" class="btn btn-primary">Submit</button>
+            <button id="cart-clear" type="button" class="btn btn-link">Clear</button>
+        </form>
+    </div>
+</div>
+{% verbatim %}
+<script id="line-template" type="text/x-handlebars-template">
+    {{#this}}
+    <li id="{{uuid}}" data-product-id="{{product_id}}">
+        <button type="button" class="btn btn-default btn-xxs cart-item-minus pull-left" aria-label="Less">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        </button>
+        <span class="cart-item-qty pull-left">{{qty}} {{uom_text}}.</span>
+        <button type="button" class="btn btn-default btn-xxs cart-item-plus pull-left" aria-label="More">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+        <span class="cart-item-name pull-left">{{product_name}}</span>
+        <button type="button" class="btn btn-default btn-xxs cart-item-remove pull-right" aria-label="Less">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+        <span class="cart-item-subtotal pull-right">{{subtotal_str}} €</span>
+    </li>
+    {{/this}}
+</script>
+<script id="discount-template" type="text/x-handlebars-template">
+    {{#this}}
+    <li>
+        <span class="cart-item-name pull-left">{{description}}</span>
+        <span class="cart-item-subtotal pull-right">{{subtotal_str}} €</span>
+    </li>
+    {{/this}}
+</script>
+<script id="total-template" type="text/x-handlebars-template">
+    <li data-id="{{id}}" data-product-id="{{product_id}}">
+        <button type="button" class="btn btn-default btn-xxs cart-item-minus pull-left" aria-label="Less">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        </button>
+        <span class="cart-item-qty pull-left">{{qty}} {{uom_text}}</span>
+        <button type="button" class="btn btn-default btn-xxs cart-item-plus pull-left" aria-label="More">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+        <span class="cart-item-name pull-left">{{name}}</span>
+        <button type="button" class="btn btn-default btn-xxs cart-item-remove pull-right" aria-label="Less">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+        <span class="cart-item-subtotal pull-right">{{subtotal}} €</span>
+    </li>
+    {{/this}}
+</script>
+{% endverbatim %}
+{% endblock %}
