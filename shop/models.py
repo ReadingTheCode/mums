@@ -110,7 +110,7 @@ class Order(models.Model):
                     break
         if len(menu.keys()) == len(product_types):
             menu['base'] = base
-            menu['line_ids'] = line_ids
+            # menu['line_ids'] = line_ids
             return menu, values
         return False, lines
 
@@ -145,19 +145,19 @@ class Order(models.Model):
                 'description': 'Menu discount',
                 'base': str(menu.get('base', 0.)),
                 'percent': DISCOUNT_PERCENT_MENU,
-                'line_ids': menu.get('line_ids', [])
+                # 'line_ids': menu.get('line_ids', [])
             })
             menu, lines = cls.menuSearch(lines)
         # Then, look for lines with 3x2 offer products
         offer, lines = cls.offerSearch(lines)
         while offer:
-            line_id = offer.get('id', False)
+            # line_id = offer.get('id', False)
             discounts.append({
                 'discount_type': 'qty',
                 'description': 'Discount 3x2 (%s)' % offer.get('product_name'),
                 'base': str(offer.get('product_price', 0.)),
                 'qty': offer.get('qty', 0),
-                'line_ids': [line_id] if line_id else [],
+                # 'line_ids': [line_id] if line_id else [],
             })
             offer, lines = cls.offerSearch(lines)
         return discounts
@@ -207,10 +207,10 @@ class Order(models.Model):
                 percent=Decimal(discount.get('percent', 0.)),
                 qty=discount.get('qty', 1),
             )
-            lines = [OrderLine.objects.get(id=x)
-                     for x in discount.get('lines_ids', [])]
-            if lines:
-                d.add(*lines)
+            # lines = [OrderLine.objects.get(id=x)
+            #          for x in discount.get('lines_ids', [])]
+            # if lines:
+            #     d.add(*lines)
         order.numberSet()
         order.totalSet()
         order.save()
@@ -251,7 +251,7 @@ class Discount(models.Model):
     qty = models.IntegerField(default=1)
     subtotal = models.DecimalField(
         max_digits=10, decimal_places=2, default=0.0)
-    lines = models.ManyToManyField(OrderLine)
+    # lines = models.ManyToManyField(OrderLine)
 
     def __unicode__(self):
         """Discount total"""
